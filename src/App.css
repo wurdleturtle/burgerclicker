@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+
+* {
+  font-family: itim;
+}
+
+.app .title {
+  text-align: center;
+}
+
+html {
+  background-color: #212121;
+  color: #fff;
+}
