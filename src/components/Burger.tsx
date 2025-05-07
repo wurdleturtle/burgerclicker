@@ -1,7 +1,7 @@
 import "./Burger.css";
 
 interface Props {
-  setClicks: React.Dispatch<React.SetStateAction<number>>;
+  setClicks: (type: string) => {};
   clicks: number;
 }
 
@@ -9,7 +9,7 @@ const Burger = ({ setClicks, clicks }: Props) => {
   return (
     <div
       onClick={() => {
-        setClicks((prevClicks: number) => prevClicks + 1);
+        setClicks("");
       }}
       className="Burger"
     >

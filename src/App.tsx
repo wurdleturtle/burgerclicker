@@ -6,6 +6,7 @@ import { api } from "./api";
 
 function App() {
   const [clicks, setClicks] = useState(0);
+  const [patty, setPatty] = useState(0);
   const [, setWs] = useState<WebSocket | null>(null);
   useEffect(() => {
     const websocket = new WebSocket(`ws://localhost:3000`);
@@ -18,6 +19,7 @@ function App() {
       const data = JSON.parse(event.data);
       console.log("Received click update:", data);
       setClicks(data.clicks);
+      setPatty(data.patty);
     };
 
     setWs(websocket);
@@ -32,14 +34,15 @@ function App() {
     try {
       const response = await axios.get(`${api}/`);
       setClicks(response.data.clicks);
+      setPatty(response.data.patty);
     } catch (error) {
       console.error("Error fetching initial clicks:", error);
     }
   };
 
-  const incClick = async () => {
+  const incClick = async (type: string) => {
     try {
-      await axios.post(`${api}/inc`);
+      await axios.post(`${api}/inc${type}`);
     } catch (error) {
       console.error("Error incrementing clicks:", error);
     }
@@ -56,6 +59,14 @@ function App() {
         Get Current Clicks
       </button>
       <Burger setClicks={incClick} clicks={clicks} />
+      <p>Patties: {patty}</p>
+      <button
+        onClick={() => {
+          incClick("/patty");
+        }}
+      >
+        Inc Patty
+      </button>
     </div>
   );
 }
