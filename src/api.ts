@@ -1,1 +1,1 @@
-export const api = "http://10.0.0.133:3000";
+export const api = "http://localhost:3000";

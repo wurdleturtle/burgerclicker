@@ -3,10 +3,12 @@ import "./App.css";
 import Burger from "./components/Burger";
 import axios from "axios";
 import { api } from "./api";
+import BurgerPart from "./components/BurgerPart";
 
 function App() {
   const [clicks, setClicks] = useState(0);
   const [patty, setPatty] = useState(0);
+  const [lacksClicks, setLacksClicks] = useState(false);
   const [, setWs] = useState<WebSocket | null>(null);
   useEffect(() => {
     const websocket = new WebSocket(`ws://localhost:3000`);
@@ -43,8 +45,10 @@ function App() {
   const incClick = async (type: string) => {
     try {
       await axios.post(`${api}/inc${type}`);
+      setLacksClicks(false);
     } catch (error) {
       console.error("Error incrementing clicks:", error);
+      setLacksClicks(true);
     }
   };
 
@@ -58,15 +62,11 @@ function App() {
       >
         Get Current Clicks
       </button>
-      <Burger setClicks={incClick} clicks={clicks} />
-      <p>Patties: {patty}</p>
-      <button
-        onClick={() => {
-          incClick("/patty");
-        }}
-      >
-        Inc Patty
-      </button>
+      <div className="BurgerContainer">
+        <Burger setClicks={incClick} clicks={clicks} />
+        <BurgerPart type="patty" count={patty} inc={incClick} />
+      </div>
+      {lacksClicks && <h1>You need more clicks!</h1>}
     </div>
   );
 }

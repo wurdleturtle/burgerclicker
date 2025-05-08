@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": ".."
+	},
+	{
+		"path": "../../burgerclicker-backend"
+	},
+	{
+		"path": "../../meownet-backend"
+	}
+],
+  "settings": {}
+}

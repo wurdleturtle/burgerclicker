@@ -12,3 +12,9 @@ html {
   background-color: #212121;
   color: #fff;
 }
+
+.BurgerContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
